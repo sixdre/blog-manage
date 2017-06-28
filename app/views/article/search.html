@@ -1,0 +1,37 @@
+<!--<div class="col-md-4">
+	<div class="input-group">
+		<input id="search_title" type="text" class="form-control" ng-model="val" placeholder="请输入您要搜索的文章标题">
+		<span class="input-group-btn">
+			<button id="search_btn" class="btn btn-primary" type="button" ng-click="search(val);">Go!</button>
+		</span>
+	</div>
+	<div id="showSerach_results">
+		<ul>
+			<li ng-repeat="item in searchResult">{{item.title}}</li>
+		</ul>
+	</div>
+</div>-->
+
+
+
+
+<div class="bg-light lter b-b wrapper-md">
+	<h1 class="m-n font-thin h3"><i class="icon-magnifier i-sm m-r-sm"></i> Search</h1>
+</div>
+<div class="wrapper-md">
+	<form action="#" class="m-b-md">
+		<div class="input-group">
+			<input type="text" class="form-control input-lg" ng-model="val" placeholder="Type keyword">
+			<span class="input-group-btn">
+        <button class="btn btn-lg btn-default" type="button" ng-click="search(val);">Search</button>
+      </span>
+		</div>
+	</form>
+	<ul>
+		<li ng-repeat="item in results">{{item.title}}</li>
+	</ul>
+
+	<p class="m-b-md"><strong>{{length}}</strong> Results found for: <strong>{{val}}</strong></p>
+	
+</div>
+

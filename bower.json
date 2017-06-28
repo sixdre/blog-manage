@@ -1,0 +1,46 @@
+{
+  "name": "xhblog",
+  "description": "xhblog bower",
+  "main": "libs",
+  "authors": [
+    "xuhao"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "123456"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.3",
+    "angular-cookies": "^1.6.3",
+    "angular-resource": "^1.6.3",
+    "angular-touch": "^1.6.3",
+    "angular-sanitize": "^1.6.3",
+    "angular-ui-router": "^0.4.2",
+    "angular-bootstrap": "^2.5.0",
+    "angular-translate": "^2.15.1",
+    "angular-ui-select": "^0.19.6",
+    "angular-bootstrap-nav-tree": "*",
+    "AngularJS-Toaster": "angularjs-toaster#^2.1.0",
+    "oclazyload": "^1.1.0",
+    "ngstorage": "^0.3.11",
+    "ng-file-upload": "^12.2.13",
+    "moment": "^2.18.1",
+    "screenfull": "^3.1.0",
+    "jquery-slimscroll": "slimscroll#^1.3.8",
+    "sweetalert2": "^6.4.4",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "angular-ui-grid": "^4.0.4",
+    "art-template": "^4.8.2",
+    "nivo-slider": "*"
+  }
+}
