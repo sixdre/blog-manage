@@ -99,7 +99,7 @@ gulp.task('server',function() {
         './app/scripts/**/*.js',
         './app/styles/*.css',
     ];
-    var middleware = proxyMiddleware(['/api'], {target: 'http://localhost:9292/', changeOrigin: true});
+    var middleware = proxyMiddleware(['/api','/admin_login','/admin_regist','/admin/loadData'], {target: 'http://localhost:7893/', changeOrigin: true});
     browserSync.init({	
         browser: 'chrome',
         notify: true,
