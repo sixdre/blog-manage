@@ -1,11 +1,13 @@
 var gulp=require('gulp'),
 	browserSync = require('browser-sync'),
 	reload = browserSync.reload;
-var $ = require('gulp-load-plugins')();
+
 var proxyMiddleware = require('http-proxy-middleware');
 var concat=require('gulp-concat');
 var uglify=require('gulp-uglify');
 var rename=require('gulp-rename');
+var cache = require('gulp-cache');
+var imagemin = require('gulp-imagemin'); //压缩图片
 var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var useref = require('gulp-useref');
@@ -34,25 +36,30 @@ var paths={
 
 
 //图片
-//gulp.task('images', function () {
-//return gulp.src('app/images/**/*')
-//  .pipe($.cache($.imagemin({
-//    progressive: true,
-//    interlaced: true
-//  })))
-//  .pipe(gulp.dest('dist/images'));
-//});
+gulp.task('images', function () {
+return gulp.src('app/images/**/*')
+    .pipe(cache(imagemin({
+        progressive: true,
+        interlaced: true
+    })))
+    .pipe(gulp.dest('dist/images'));
+});
 
 //字体
-//gulp.task('fonts', function () {
+gulp.task('fonts', function () {
 //return gulp.src(require('main-bower-files')().concat(
 //	['bower_components/bootstrap/fonts/**/*',
-//	 'bower_components/font-awesome/fonts/**/*'
+//	 'bower_components/font-awesome/fonts/**/*',
+//	 'app/fonts'
 //	]))
 //  .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2,otf}'))
 //  .pipe($.flatten())
 //  .pipe(gulp.dest('dist/fonts'));
-//});
+	return gulp.src('app/fonts/**/*')
+		.pipe(gulp.dest('dist/fonts'))
+
+
+});
 
 gulp.task('clean', function () {
   del.bind(null, ['.tmp', 'dist/*']);
@@ -87,7 +94,7 @@ gulp.task('tpl', function () {
 });
 
 
-gulp.task('build',['Jsmain','Cssmain','html','tpl'],function(){
+gulp.task('build',['fonts','images','html','tpl'],function(){
 	console.log('build success');
 })
 

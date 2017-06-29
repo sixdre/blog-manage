@@ -6,7 +6,7 @@
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   
-  <!-- build:css /stylesheets/admin-vendor.main.css -->
+  <!-- build:css(.) styles/admin-vendor.main.css -->
   <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="/libs/sweetalert2/dist/sweetalert2.min.css" type="text/css" />
@@ -15,11 +15,11 @@
   <link rel="stylesheet" href="/libs/angular-ui-select/dist/select.min.css" type="text/css" />
   <!-- endbuild -->
   
-  <!-- build:css /stylesheets/admin.main.css -->
-  <link rel="stylesheet" href="/styles/animate.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/font.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/app.css" type="text/css" />
+  <!-- build:css styles/admin.main.css -->
+  <link rel="stylesheet" href="styles/animate.css" type="text/css" />
+  <link rel="stylesheet" href="styles/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="styles/font.css" type="text/css" />
+  <link rel="stylesheet" href="styles/app.css" type="text/css" />
   <!-- endbuild -->
   
 </head>
@@ -34,73 +34,90 @@
   	'app-aside-dock':app.settings.asideDock, 
   	'container':app.settings.container}" ui-view></div>
 
-
-
-
-	<!-- build:js /javascripts/admin-vendor.min.js -->
-  <script src="/libs/jquery/dist/jquery.min.js"></script>
-	<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+	
+  <!-- build:js(.) scripts/admin-vendor.min.js -->
+	<script src="/libs/jquery/dist/jquery.js"></script>
+	<script src="/libs/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="/libs/sweetalert2/dist/sweetalert2.js"></script>
 	<script src="/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="/libs/angular/angular.min.js"></script>
-  <script src="/libs/angular-animate/angular-animate.min.js"></script>
-  <script src="/libs/angular-cookies/angular-cookies.min.js"></script>
-  <script src="/libs/angular-resource/angular-resource.min.js"></script>
-  <script src="/libs/angular-sanitize/angular-sanitize.min.js"></script>
-  <script src="/libs/angular-touch/angular-touch.min.js"></script>
-  <script src="/libs/angular-ui-router/release/angular-ui-router.min.js"></script> 
-  <script src="/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  <script src="/libs/angular-ui-select/dist/select.min.js"></script>
-  <script src="/libs/oclazyload/dist/ocLazyLoad.min.js"></script>
-  <script src="/libs/ngstorage/ngStorage.min.js"></script>
-  <script src="/libs/ng-file-upload/ng-file-upload.min.js"></script>
-  <script src="/libs/angular-ui-grid/ui-grid.min.js"></script>
-  <script src="/libs/moment/min/moment.min.js"></script>
-  <script src="/libs/AngularJS-Toaster/toaster.min.js"></script>
+	<script src="/libs/moment/min/moment.min.js"></script>
+
+	<script src="/libs/angular/angular.js"></script>
+  <script src="/libs/angular-animate/angular-animate.js"></script>
+  <script src="/libs/angular-cookies/angular-cookies.js"></script>
+  <script src="/libs/angular-resource/angular-resource.js"></script>
+  <script src="/libs/angular-sanitize/angular-sanitize.js"></script>
+  <script src="/libs/angular-touch/angular-touch.js"></script>
+
+  <script src="/libs/angular-ui-router/release/angular-ui-router.js"></script> 
+  <script src="/libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="/libs/angular-ui-select/dist/select.js"></script>
+  <script src="/libs/oclazyload/dist/ocLazyLoad.js"></script>
+  <script src="/libs/ngstorage/ngStorage.js"></script>
+  <script src="/libs/ng-file-upload/ng-file-upload.js"></script>
+  <script src="/libs/angular-ui-grid/ui-grid.js"></script>
+  <script src="/libs/AngularJS-Toaster/toaster.js"></script>
   <!-- endbuild -->
   
-  
-  <!-- build:js /javascripts/admin.min.js -->
+	
+	
+  <!-- build:js scripts/admin.min.js -->
   <!--百度编辑器-->
-	<script src="/ueditor/ueditor.config.js"></script>
-	<script src="/ueditor/ueditor.all.min.js"></script>
+	<script src="ueditor/ueditor.config.js"></script>
+	<script src="ueditor/ueditor.all.min.js"></script>
 	<!--/ 百度编辑器-->
   
 	<!-- App -->
-  <script src="/scripts/app.js"></script>
-  <script src="/scripts/config/settings.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/scripts/config/constant.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/scripts/config.js"></script>
-  <script src="/scripts/config.lazyload.js"></script>
-  <script src="/scripts/router.js"></script>
-  <script src="/scripts/controllers/AppCtrl.js"></script>
-  <script src="/scripts/controllers/modalCtrl.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/config/settings.js"></script>
+  <script src="scripts/config/constant.js"></script>
+  <script src="scripts/config.js"></script>
+  <script src="scripts/config.lazyload.js"></script>
+  <script src="scripts/router.js"></script>
+  <script src="scripts/controllers/AppCtrl.js"></script>
+  <script src="scripts/controllers/modalCtrl.js"></script>
   
-  <script src="/scripts/services/ui-load.js"></script>
-  <script src="/scripts/services/apiService.js"></script>
-  <script src="/scripts/services/DataService.js"></script>
+  <script src="scripts/services/ui-load.js"></script>
+  <script src="scripts/services/apiService.js"></script>
+  <script src="scripts/services/DataService.js"></script>
+  
+  <script src="scripts/services/articleService.js"></script>
+  <script src="scripts/controllers/articleCtrl.js"></script>
+  <script src="scripts/services/friendService.js"></script>
+  <script src="scripts/controllers/friendCtrl.js"></script>
+  <script src="scripts/services/cate_tagService.js"></script>
+  <script src="scripts/controllers/cate_tagCtrl.js"></script>
+  <script src="scripts/services/userService.js"></script>
+  <script src="scripts/controllers/userCtrl.js"></script>
+  <script src="scripts/services/fileService.js"></script>
+  <script src="scripts/controllers/fileCtrl.js"></script>
+  <script src="scripts/services/settingService.js"></script>
+  <script src="scripts/controllers/settingCtrl.js"></script>
+  <script src="scripts/controllers/signin.js"></script>
+  <script src="scripts/controllers/signup.js"></script>
+  
   <!--工具服务-->
-  <script src="/scripts/services/toolService.js"></script>
+  <script src="scripts/services/toolService.js"></script>
   <!--自定义服务-->
   <!--defPop为自定义的弹框服务-->
-  <script src="/scripts/services/defPop.js"></script>
+  <script src="scripts/services/defPop.js"></script>
   <!--/ defPop-->
-  <script src="/scripts/services/alertService.js"></script>
+  <script src="scripts/services/alertService.js"></script>
   <!--/ 自定义服务-->
   
-  <script src="/scripts/filters/fromNow.js"></script>
-  <script src="/scripts/directives/setnganimate.js"></script>
-  <script src="/scripts/directives/ui-butterbar.js"></script>
-  <script src="/scripts/directives/ui-focus.js"></script>
-  <script src="/scripts/directives/pointer.js"></script>
-  <script src="/scripts/directives/ui-fullscreen.js"></script>
-  <script src="/scripts/directives/ui-jq.js"></script>
-  <script src="/scripts/directives/ui-module.js"></script>
-  <script src="/scripts/directives/ui-nav.js"></script>
-  <script src="/scripts/directives/ui-scroll.js"></script>
-  <script src="/scripts/directives/ui-shift.js"></script>
-  <script src="/scripts/directives/ui-toggleclass.js"></script>
-  <script src="/scripts/directives/ui-validate.js"></script>
+  <script src="scripts/filters/fromNow.js"></script>
+  <script src="scripts/directives/setnganimate.js"></script>
+  <script src="scripts/directives/ui-butterbar.js"></script>
+  <script src="scripts/directives/ui-focus.js"></script>
+  <script src="scripts/directives/pointer.js"></script>
+  <script src="scripts/directives/ui-fullscreen.js"></script>
+  <script src="scripts/directives/ui-jq.js"></script>
+  <script src="scripts/directives/ui-module.js"></script>
+  <script src="scripts/directives/ui-nav.js"></script>
+  <script src="scripts/directives/ui-scroll.js"></script>
+  <script src="scripts/directives/ui-shift.js"></script>
+  <script src="scripts/directives/ui-toggleclass.js"></script>
+  <script src="scripts/directives/ui-validate.js"></script>
    <!-- endbuild -->
  
   
