@@ -69,6 +69,16 @@ gulp.task('fonts', function () {
 
 });
 
+//字体
+gulp.task('ue', function () {
+	return gulp.src('app/ueditor/**/*')
+		.pipe(gulp.dest('dist/ueditor'))
+
+
+});
+
+
+
 
 //压缩css
 gulp.task('Cssmain',function(){	
@@ -114,7 +124,7 @@ gulp.task('clean', function () {
 
 
 
-gulp.task('build',['fonts','images','html','tpl'],function(){
+gulp.task('build',['ue','fonts','images','html','tpl'],function(){
 	console.log('build success');
 })
 
@@ -133,7 +143,7 @@ gulp.task('server',function() {
         port: 9191,
         server: {
             baseDir: "./app",
-            index:'',
+            index:'admin.html',
             routes: {
 		        '/libs': 'libs'
 		    },

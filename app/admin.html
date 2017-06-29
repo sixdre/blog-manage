@@ -6,7 +6,7 @@
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   
-  <!-- build:css(.) styles/admin-vendor.main.css -->
+  <!-- build:css(.) /styles/admin-vendor.main.css -->
   <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="/libs/sweetalert2/dist/sweetalert2.min.css" type="text/css" />
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/libs/angular-ui-select/dist/select.min.css" type="text/css" />
   <!-- endbuild -->
   
-  <!-- build:css styles/admin.main.css -->
+  <!-- build:css /styles/admin.main.css -->
   <link rel="stylesheet" href="styles/animate.css" type="text/css" />
   <link rel="stylesheet" href="styles/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="styles/font.css" type="text/css" />
@@ -35,13 +35,14 @@
   	'container':app.settings.container}" ui-view></div>
 
 	
-  <!-- build:js(.) scripts/admin-vendor.min.js -->
+  <!-- build:js(.) /scripts/admin-vendor.min.js -->
 	<script src="/libs/jquery/dist/jquery.js"></script>
 	<script src="/libs/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="/libs/sweetalert2/dist/sweetalert2.js"></script>
 	<script src="/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="/libs/moment/min/moment.min.js"></script>
-
+	<script src="/libs/screenfull/dist/screenfull.min.js"></script>
+	
 	<script src="/libs/angular/angular.js"></script>
   <script src="/libs/angular-animate/angular-animate.js"></script>
   <script src="/libs/angular-cookies/angular-cookies.js"></script>
@@ -57,14 +58,17 @@
   <script src="/libs/ng-file-upload/ng-file-upload.js"></script>
   <script src="/libs/angular-ui-grid/ui-grid.js"></script>
   <script src="/libs/AngularJS-Toaster/toaster.js"></script>
+  
+  
   <!-- endbuild -->
   
 	
+	<!--百度编辑器-->
+	<script src="/ueditor/ueditor.config.js"></script>
+	<script src="/ueditor/ueditor.all.min.js"></script>
 	
-  <!-- build:js scripts/admin.min.js -->
-  <!--百度编辑器-->
-	<script src="ueditor/ueditor.config.js"></script>
-	<script src="ueditor/ueditor.all.min.js"></script>
+  <!-- build:js /scripts/admin.min.js -->
+  
 	<!--/ 百度编辑器-->
   
 	<!-- App -->

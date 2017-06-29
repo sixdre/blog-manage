@@ -9,11 +9,11 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 				.state('app', {
 					abstract: true,
 					url: '/app',
-					templateUrl: 'views/blocks/app.html'
+					templateUrl: '/views/blocks/app.html'
 				})
 				.state('app.dashboard', {
 					url: '/dashboard',
-					templateUrl: 'views/dashboard.html',
+					templateUrl: '/views/dashboard.html',
 					/*onEnter:function($rootScope){
 					
 					},
@@ -30,126 +30,59 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 				.state('app.article', {
 					abstract: true,
 					url: '/article',
-					template: '<div ui-view class="fade-in-up"></div>',			//new
-//					resolve: {
-//	                      deps: ['uiLoad',
-//	                        function( uiLoad){
-//	                          return uiLoad.load([
-//	                              	'/scripts/services/articleService.js',
-//									'/scripts/controllers/articleCtrl.js'
-//	                          ]);
-//	                      }]
-//		            }
-//					resolve: {
-//	                      deps: ['$ocLazyLoad',
-//	                        function( $ocLazyLoad ){
-//	                          return $ocLazyLoad.load(['ui.select']).then(
-//	                              function(){
-//	                                  return $ocLazyLoad.load([
-//											'/scripts/services/articleService.js',
-//											'/scripts/controllers/articleCtrl.js'
-//	                                  ]);
-//	                              }
-//	                          );
-//	                      }]
-//	                  }					
+					template: '<div ui-view class="fade-in-up"></div>'				
 				})
-				.state('app.article.publish', {					//new
+				.state('app.article.publish', {					
 					url: '/publish?id',
-					templateUrl: 'views/article/publish.html',
+					templateUrl: '/views/article/publish.html',
 					controller:'articlePublishCtrl',
 				})
-				.state('app.article.list', {					//new
+				.state('app.article.list', {					
 					url: '/list/:page',
-					templateUrl: 'views/article/list.html',
+					templateUrl: '/views/article/list.html',
 					controller:"articleListCtrl"
 				})
 				.state('app.article.search', {
 					url: '/search',
-					templateUrl: 'views/article/search.html',
+					templateUrl: '/views/article/search.html',
 					controller:'articleSearchCtrl'
 				})
 				.state("app.friend",{
 					url:"/friend",
-					templateUrl:'views/indep/friends.html',
-					controller:"friendCtrl",
-//					resolve: {
-//	                      deps: ['uiLoad',
-//	                        function( uiLoad){
-//	                          return uiLoad.load([
-//	                                '/scripts/services/friendService.js',
-//	                                '/scripts/controllers/friendCtrl.js'
-//	                          ]);
-//	                      }]
-//		            }
+					templateUrl:'/views/indep/friends.html',
+					controller:"friendCtrl"
 				})
 				.state("app.catetag",{
 					url:"/catetag",
-					templateUrl:'views/indep/cate_tag.html',
-					controller:'CateTagCtrl',
-//					resolve: {
-//                    deps: ['uiLoad',
-//                      function( uiLoad){
-//                        return uiLoad.load([
-//                              '/scripts/services/cate_tagService.js',
-//                              '/scripts/controllers/cate_tagCtrl.js'
-//                        ]);
-//                    }]
-//	                },
+					templateUrl:'/views/indep/cate_tag.html',
+					controller:'CateTagCtrl'
 				})
 				.state("app.users",{
 					url:"/users",
-					templateUrl:'views/indep/users.html',
-					controller:'userCtrl',
-//					resolve: {
-//	                      deps: ['uiLoad',
-//	                        function( uiLoad){
-//	                          return uiLoad.load([
-//	                                '/scripts/services/userService.js',
-//	                                '/scripts/controllers/userCtrl.js'
-//	                          ]);
-//	                      }]
-//	                },
+					templateUrl:'/views/indep/users.html',
+					controller:'userCtrl'
 				})
 				.state("app.file",{
 					url:"/file",
-					templateUrl:'views/indep/file.html',
-					controller:'fileCtrl',
-//					resolve: {
-//	                      deps: ['uiLoad',
-//	                        function( uiLoad){
-//	                          return uiLoad.load([
-//	                                '/scripts/services/fileService.js',
-//	                                '/scripts/controllers/fileCtrl.js'
-//	                          ]);
-//	                      }]
-//	                },
+					templateUrl:'/views/indep/file.html',
+					controller:'fileCtrl'
 				})
 				.state('app.setting', {
 					abstract: true,
 					url: '/setting',
-					template: '<div ui-view class="fade-in-up"></div>',
-//					resolve: {
-//	                      deps: ['uiLoad',
-//	                        function( uiLoad){
-//	                          return uiLoad.load([
-//	                                '/scripts/services/settingService.js',
-//	                                '/scripts/controllers/settingCtrl.js'
-//	                          ]);
-//	                      }]
-//		                },
+					template: '<div ui-view class="fade-in-up"></div>'
 				})
 				.state('app.setting.banner', {
 					url: '/banner',
-					templateUrl: 'views/setting/banner.html'
+					templateUrl: '/views/setting/banner.html'
 				})
 				.state('app.setting.banner.add', {
 					url: '/banner_add',
-					templateUrl: 'views/setting/banner_add.html'
+					templateUrl: '/views/setting/banner_add.html'
 				})
 				.state('app.setting.banner.list', {
 					url: '/banner_list',
-					templateUrl: 'views/setting/banner_list.html'
+					templateUrl: '/views/setting/banner_list.html'
 				})
 				.state('access', {
 	                  url: '/access',
@@ -157,27 +90,15 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 	             })
 	             .state('access.signin', {
 	            	 url: '/signin',
-	                  templateUrl: 'views/signin.html',
-//	                  resolve: {
-//	                      deps: ['uiLoad',
-//	                        function( uiLoad ){
-//	                          return uiLoad.load( ['/scripts/controllers/signin.js'] );
-//	                      }]
-//	                  }
+	                  templateUrl: '/views/signin.html'
 	             })
 	             .state('access.signup', {
 	            	 url: '/signup',
-	                  templateUrl: 'views/signup.html',
-//	                  resolve: {
-//	                      deps: ['uiLoad',
-//	                        function( uiLoad ){
-//	                          return uiLoad.load( ['/scripts/controllers/signup.js'] );
-//	                      }]
-//	                  }
+	                  templateUrl: '/views/signup.html'
 	             })
 				.state('access.404', {
 	                  url: '/404',
-	                  templateUrl: 'views/404.html'
+	                  templateUrl: '/views/404.html'
 	             })
 				
 		}
