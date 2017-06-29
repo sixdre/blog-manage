@@ -15,34 +15,42 @@ var htmlmin = require('gulp-htmlmin');
 var gulpif = require('gulp-if');
 var del = require('del');
 
-var appConfig={
-    appPath:'app/', //配置源文件路径
-    dist:'dist/',//配置打包输出路径
-    isDebug:true//配置编译方式
-};
-
-var paths={
-	js:[
-		appConfig.appPath+'scripts/*.js',
-		appConfig.appPath+'scripts/**/*.js'
-	],
-	css:[
-		appConfig.appPath+'styles/*.css'
-	],
-	html:[
-		appConfig.appPath+'index.html'
-	]
+const pathConfig={
+    "css": {
+        "src": ["app/styles/*.css", "public/stylesheets/**/*.css"],
+        "dist": "dist/styles/"
+    },
+    "images": {
+        "src": "app/images/**/*",
+        "dist": "dist/images/"
+    },
+    'fonts':{
+    	"src":'app/fonts/**/*',
+    	"dist":"dist/fonts/"
+    },
+    "js": {
+        "src": ["app/scripts/*.js","app/scripts/**/*.js"],
+        "dist": "dist/scripts/"
+    },
+    'html':{
+    	"src": "app/admin.html",
+    	"dist": "dist/"
+    },
+    "tpl":{
+    	"src":['app/views/*.html','app/views/**/*.html'],
+    	"dist": "dist/views/"
+    }
 }
 
 
 //图片
 gulp.task('images', function () {
-return gulp.src('app/images/**/*')
+return gulp.src(pathConfig.images.src)
     .pipe(cache(imagemin({
         progressive: true,
         interlaced: true
     })))
-    .pipe(gulp.dest('dist/images'));
+    .pipe(gulp.dest(pathConfig.images.dist));
 });
 
 //字体
@@ -55,43 +63,55 @@ gulp.task('fonts', function () {
 //  .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2,otf}'))
 //  .pipe($.flatten())
 //  .pipe(gulp.dest('dist/fonts'));
-	return gulp.src('app/fonts/**/*')
-		.pipe(gulp.dest('dist/fonts'))
+	return gulp.src(pathConfig.fonts.src)
+		.pipe(gulp.dest(pathConfig.fonts.dist))
 
 
 });
 
-gulp.task('clean', function () {
-  del.bind(null, ['.tmp', 'dist/*']);
-});
 
 //压缩css
 gulp.task('Cssmain',function(){	
-    return gulp.src(paths.css)         
+    return gulp.src(pathConfig.css.src)         
      	.pipe(minifyCss())
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest(pathConfig.css.dist))
 });
 
 //压缩js
 gulp.task('Jsmain',function(){	
-    return gulp.src(paths.js)         
+    return gulp.src(pathConfig.js.src)         
      	.pipe(uglify())
-        .pipe(gulp.dest('dist/scripts'))
+        .pipe(gulp.dest(pathConfig.js.dist))
 });
+
 //提取html页面的js,css文件进行处理
 gulp.task('html', function () {
-    return gulp.src(paths.html)
+    return gulp.src(pathConfig.html.src)
         .pipe(useref())
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', minifyCss()))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(pathConfig.html.dist));
 });
 
-//模板 views
+//模板视图 views
 gulp.task('tpl', function () {
-  return gulp.src(['app/views/*.html','app/views/**/*.html'])
-  		.pipe(gulp.dest('dist/views'))
+  return gulp.src(pathConfig.tpl.src)
+  		.pipe(htmlmin({
+  			removeComments: true,//清除HTML注释
+        	collapseWhitespace: true,//压缩HTML
+        	collapseBooleanAttributes: true,//省略布尔属性的值 <input checked="true"/> ==> <input />
+	        removeEmptyAttributes: true,//删除所有空格作属性值 <input id="" /> ==> <input />
+	        removeScriptTypeAttributes: true,//删除<script>的type="text/javascript"
+	        removeStyleLinkTypeAttributes: true,//删除<style>和<link>的type="text/css"
+  		}))
+  		.pipe(gulp.dest(pathConfig.tpl.dist))
 });
+
+
+gulp.task('clean', function () {
+  	return del.bind(null, ['.tmp', 'dist/*']);
+});
+
 
 
 gulp.task('build',['fonts','images','html','tpl'],function(){
