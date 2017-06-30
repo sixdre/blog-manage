@@ -45,24 +45,16 @@ const pathConfig={
 
 //图片
 gulp.task('images', function () {
-return gulp.src(pathConfig.images.src)
-    .pipe(cache(imagemin({
-        progressive: true,
-        interlaced: true
-    })))
-    .pipe(gulp.dest(pathConfig.images.dist));
+	return gulp.src(pathConfig.images.src)
+	    .pipe(cache(imagemin({
+	        progressive: true,
+	        interlaced: true
+	    })))
+	    .pipe(gulp.dest(pathConfig.images.dist));
 });
 
 //字体
 gulp.task('fonts', function () {
-//return gulp.src(require('main-bower-files')().concat(
-//	['bower_components/bootstrap/fonts/**/*',
-//	 'bower_components/font-awesome/fonts/**/*',
-//	 'app/fonts'
-//	]))
-//  .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2,otf}'))
-//  .pipe($.flatten())
-//  .pipe(gulp.dest('dist/fonts'));
 	return gulp.src(pathConfig.fonts.src)
 		.pipe(gulp.dest(pathConfig.fonts.dist))
 
@@ -132,7 +124,10 @@ gulp.task('server',function() {
         './admin/scripts/**/*.js',
         './admin/styles/*.css',
     ];
-    var middleware = proxyMiddleware(['/api','/admin_login','/admin_regist','/admin/loadData'], {target: 'http://localhost:7893/', changeOrigin: true});
+    var middleware = proxyMiddleware(['/api','/admin_login','/admin_regist','/admin/loadData'], {
+    	target: 'http://localhost:7893/', 
+    	changeOrigin: true
+    });
     browserSync.init({	
         browser: 'chrome',
         notify: true,
@@ -152,6 +147,7 @@ gulp.task('server',function() {
 });
 
 
+//综合打包
 gulp.task('build',['clean','ue','fonts','images','html','tpl'],function(){
 	console.log('build success');
 })
