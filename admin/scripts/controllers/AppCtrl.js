@@ -67,7 +67,7 @@ angular.module('app').controller('AppCtrl',
 			//留言回复
 			$scope.reply = function(item) {
 				$uibModal.open({
-					templateUrl: '/views/modal/wordModal.html',
+					templateUrl: '/admin/views/modal/wordModal.html',
 					size: 'md',
 					controller: 'WordModalInstanceCtrl',
 					resolve: {

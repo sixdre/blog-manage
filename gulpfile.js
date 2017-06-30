@@ -17,28 +17,28 @@ var del = require('del');
 
 const pathConfig={
     "css": {
-        "src": ["app/styles/*.css", "public/stylesheets/**/*.css"],
-        "dist": "dist/styles/"
+        "src": ["admin/styles/*.css", "admin/styles/**/*.css"],
+        "dist": "dist/admin/styles/"
     },
     "images": {
-        "src": "app/images/**/*",
-        "dist": "dist/images/"
+        "src": "admin/images/**/*",
+        "dist": "dist/admin/images/"
     },
     'fonts':{
-    	"src":'app/fonts/**/*',
-    	"dist":"dist/fonts/"
+    	"src":['admin/fonts/**/*','libs/bootstrap/fonts/**/*','libs/font-awesome/fonts/**/*'],
+    	"dist":"dist/admin/fonts/"
     },
     "js": {
-        "src": ["app/scripts/*.js","app/scripts/**/*.js"],
-        "dist": "dist/scripts/"
+        "src": ["admin/scripts/*.js","admin/scripts/**/*.js"],
+        "dist": "dist/admin/scripts/"
     },
     'html':{
-    	"src": "app/admin.html",
+    	"src": "admin.html",
     	"dist": "dist/"
     },
     "tpl":{
-    	"src":['app/views/*.html','app/views/**/*.html'],
-    	"dist": "dist/views/"
+    	"src":['admin/views/*.html','admin/views/**/*.html'],
+    	"dist": "dist/admin/views/"
     }
 }
 
@@ -69,12 +69,10 @@ gulp.task('fonts', function () {
 
 });
 
-//字体
+//百度编辑器
 gulp.task('ue', function () {
-	return gulp.src('app/ueditor/**/*')
-		.pipe(gulp.dest('dist/ueditor'))
-
-
+	return gulp.src('admin/ueditor/**/*')
+		.pipe(gulp.dest('dist/admin/ueditor'))
 });
 
 
@@ -124,17 +122,15 @@ gulp.task('clean', function () {
 
 
 
-gulp.task('build',['ue','fonts','images','html','tpl'],function(){
-	console.log('build success');
-})
+
 
 //开发运行
 gulp.task('server',function() {
     var files = [
-        './app/*',
-        './app/views/**/*.html',
-        './app/scripts/**/*.js',
-        './app/styles/*.css',
+        './admin/*',
+        './admin/views/**/*.html',
+        './admin/scripts/**/*.js',
+        './admin/styles/*.css',
     ];
     var middleware = proxyMiddleware(['/api','/admin_login','/admin_regist','/admin/loadData'], {target: 'http://localhost:7893/', changeOrigin: true});
     browserSync.init({	
@@ -142,7 +138,7 @@ gulp.task('server',function() {
         notify: true,
         port: 9191,
         server: {
-            baseDir: "./app",
+            baseDir: "./",
             index:'admin.html',
             routes: {
 		        '/libs': 'libs'
@@ -155,7 +151,12 @@ gulp.task('server',function() {
     gulp.watch(files).on("change", reload); 
 });
 
-//线上运行
-gulp.task('default', ['clean'], function () {
-  	gulp.start('build');
+
+gulp.task('build',['clean','ue','fonts','images','html','tpl'],function(){
+	console.log('build success');
+})
+
+
+gulp.task('default',function () {
+  	gulp.start('server');
 });

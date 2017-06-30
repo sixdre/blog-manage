@@ -9,11 +9,11 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 				.state('app', {
 					abstract: true,
 					url: '/app',
-					templateUrl: '/views/blocks/app.html'
+					templateUrl: '/admin/views/blocks/app.html'
 				})
 				.state('app.dashboard', {
 					url: '/dashboard',
-					templateUrl: '/views/dashboard.html',
+					templateUrl: '/admin/views/dashboard.html',
 					/*onEnter:function($rootScope){
 					
 					},
@@ -34,37 +34,37 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 				})
 				.state('app.article.publish', {					
 					url: '/publish?id',
-					templateUrl: '/views/article/publish.html',
+					templateUrl: '/admin/views/article/publish.html',
 					controller:'articlePublishCtrl',
 				})
 				.state('app.article.list', {					
 					url: '/list/:page',
-					templateUrl: '/views/article/list.html',
+					templateUrl: '/admin/views/article/list.html',
 					controller:"articleListCtrl"
 				})
 				.state('app.article.search', {
 					url: '/search',
-					templateUrl: '/views/article/search.html',
+					templateUrl: '/admin/views/article/search.html',
 					controller:'articleSearchCtrl'
 				})
 				.state("app.friend",{
 					url:"/friend",
-					templateUrl:'/views/indep/friends.html',
+					templateUrl:'/admin/views/indep/friends.html',
 					controller:"friendCtrl"
 				})
 				.state("app.catetag",{
 					url:"/catetag",
-					templateUrl:'/views/indep/cate_tag.html',
+					templateUrl:'/admin/views/indep/cate_tag.html',
 					controller:'CateTagCtrl'
 				})
 				.state("app.users",{
 					url:"/users",
-					templateUrl:'/views/indep/users.html',
+					templateUrl:'/admin/views/indep/users.html',
 					controller:'userCtrl'
 				})
 				.state("app.file",{
 					url:"/file",
-					templateUrl:'/views/indep/file.html',
+					templateUrl:'/admin/views/indep/file.html',
 					controller:'fileCtrl'
 				})
 				.state('app.setting', {
@@ -74,15 +74,15 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 				})
 				.state('app.setting.banner', {
 					url: '/banner',
-					templateUrl: '/views/setting/banner.html'
+					templateUrl: '/admin/views/setting/banner.html'
 				})
 				.state('app.setting.banner.add', {
 					url: '/banner_add',
-					templateUrl: '/views/setting/banner_add.html'
+					templateUrl: '/admin/views/setting/banner_add.html'
 				})
 				.state('app.setting.banner.list', {
 					url: '/banner_list',
-					templateUrl: '/views/setting/banner_list.html'
+					templateUrl: '/admin/views/setting/banner_list.html'
 				})
 				.state('access', {
 	                  url: '/access',
@@ -90,15 +90,15 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 	             })
 	             .state('access.signin', {
 	            	 url: '/signin',
-	                  templateUrl: '/views/signin.html'
+	                  templateUrl: '/admin/views/signin.html'
 	             })
 	             .state('access.signup', {
 	            	 url: '/signup',
-	                  templateUrl: '/views/signup.html'
+	                  templateUrl: '/admin/views/signup.html'
 	             })
 				.state('access.404', {
 	                  url: '/404',
-	                  templateUrl: '/views/404.html'
+	                  templateUrl: '/admin/views/404.html'
 	             })
 				
 		}
