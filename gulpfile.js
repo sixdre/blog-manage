@@ -63,8 +63,8 @@ gulp.task('fonts', function () {
 
 //百度编辑器
 gulp.task('ue', function () {
-	return gulp.src('admin/ueditor/**/*')
-		.pipe(gulp.dest('dist/admin/ueditor'))
+	return gulp.src('ueditor/**/*')
+		.pipe(gulp.dest('dist/ueditor'))
 });
 
 
