@@ -42,11 +42,6 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider',
 					templateUrl: '/admin/views/article/list.html',
 					controller:"articleListCtrl"
 				})
-				.state('app.article.search', {
-					url: '/search',
-					templateUrl: '/admin/views/article/search.html',
-					controller:'articleSearchCtrl'
-				})
 				.state("app.friend",{
 					url:"/friend",
 					templateUrl:'/admin/views/indep/friends.html',

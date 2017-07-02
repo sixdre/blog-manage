@@ -10,3 +10,9 @@ angular.module('app').constant('AUTH_EVENTS', {
 	user_name: "USER_NAME", //存储到cookie中的登录用户用户名
 	user_id: "USER_ID", //存储到cookie中的登录用户id键值
 })
+.constant('cgBusyDefaults',{		//loading 配置
+	message:'努力加载中...',
+//	minDuration:1000000,
+	templateUrl: '/admin/views/blocks/loading.html',
+//	wrapperClass: 'my-class my-class2'
+})

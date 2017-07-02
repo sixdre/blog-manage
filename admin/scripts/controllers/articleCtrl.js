@@ -178,7 +178,7 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 				title: $scope.title,
 				flag: $scope.flag
 			}
-			articleService.getData(queryParams).then(function(res) {
+			$scope.ArticlePromise=articleService.getData(queryParams).then(function(res) {
 				$scope.articleList = res.data.articles; //文章列表
 				$scope.pageConfig.totalItems = res.data.total;
 				$scope.StartNum = ($scope.pageConfig.currentPage - 1) * $scope.pageConfig.limit + 1;
@@ -289,122 +289,6 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 		$scope.edit = function(item) {
 			$state.go('app.article.publish',{id:item._id});
 		}
-			
-
-
-//		//编辑文章
-//		$scope.edit = function(item) {
-//			$uibModal.open({
-//				templateUrl: '/views/article/editor_modal.html',
-//				size: 'lg',
-//				controller: 'ModalInstanceCtrl',
-//				resolve: {
-//					data: function() { //注入到ModalInstanceCtrl 里的data
-//						return {
-//							article: item
-//						};
-//					},
-//				}
-//			}).result.then(function() {
-//				$scope.loadData();
-//			}).catch(function() {})
-//
-//		};
-
-	}
-])
-
-/*
- * 文章搜索控制器
- */
-app.controller('articleSearchCtrl', ['$rootScope', '$scope', 'articleService', "defPopService",
-	function($rootScope, $scope, articleService, defPopService) {
-		$scope.search = function(title) {
-			if(!title) {
-				return defPopService.defPop({
-					status: 0,
-					content: "请输入要搜索文章的标题！"
-				});
-			}
-			articleService.search(title).then(function(res) {
-				if(res.data.code < 0) {
-					return defPopService.defPop({
-						status: 0,
-						title: "搜索结果",
-						content: "没有找到相关文章！"
-					});
-				}
-				var results = res.data.results;
-				$scope.results = results;
-				$scope.length = results.length;
-			}).catch(function(err) {
-				defPopService.defPop({
-					status: 0,
-					content: "服务器出错了！"
-				});
-			});
-		};
-	}
-])
-
-/*
- * 模态框
- */
-app.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', "$timeout","articleService", "defPopService", "alertService",'data',
-	function($scope, $uibModalInstance, $timeout,articleService, defPopService, alertService, data) {
-
-		$scope.article = angular.copy(data.article);
-		if($scope.article.img && $scope.article.img.length) {
-			$scope.haveImg = true;
-		}
-//		$scope.article.category = $scope.article.category._id;
-		$scope.isFormal = false;
-		$timeout(function() { //这里要用$timeout 否则报错
-			UE.delEditor("update_modal"); //先销毁在进行创建否则会报错
-			var upUe = UE.getEditor('update_modal', {
-				initialFrameHeight: 200 //高度设置
-			});
-			upUe.addListener("ready", function() {
-				// editor准备好之后才可以使用
-				upUe.setContent($scope.article.tagcontent);
-			});
-		});
-
-		//文章更新
-		$scope.update = function() {
-			if($scope.article.tags.length > 3) {
-				return defPopService.defPop({
-					status: 0,
-					content: "标签最多只能添加3个！"
-				})
-			}
-			var article = angular.copy($scope.article);
-			if($scope.isFormal) {
-				article.isDraft = false;
-				article.isDeleted = false;
-			}
-			article.tagcontent = UE.getEditor('update_modal').getContent();
-			article.content = UE.getEditor('update_modal').getContentTxt();
-
-			articleService.update({
-				cover: $scope.file,
-				article: article
-			}).then(function(res) {
-				if(res.data.code > 0) {
-					alertService.success('更新成功').then(function() {
-						$uibModalInstance.close();
-					});
-				}
-			}, function(resp) {
-				alertService.error('更新失败!');
-			}, function(evt) {
-				//console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
-			});
-		};
-
-		$scope.cancel = function() {
-			$uibModalInstance.dismiss('cancel');
-		};
 
 	}
 ])

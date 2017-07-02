@@ -11,18 +11,11 @@ angular.module('app', [
     'ui.select',
     'ui.load',
     'ui.jq',
-    'ui.grid',
-    'ui.grid.selection',
-    'ui.grid.edit',
-    'ui.grid.exporter',
-    'ui.grid.autoResize',
-    'ui.grid.pagination',
     'ui.validate',
     'oc.lazyLoad',
     'ngFileUpload',
-    //'pascalprecht.translate',
     "toaster",
-   /* "textAngular"*/
+    'cgBusy'
 ]).run(['$rootScope', '$window', '$cookies', '$cookieStore', '$state', '$stateParams','USER',
 	function($rootScope, $window, $cookies, $cookieStore, $state, $stateParams,USER) {
 		
@@ -69,6 +62,7 @@ angular.module('app', [
 .factory('authInterceptor',['$rootScope','$cookies','USER','AUTH_EVENTS',function($rootScope, $cookies,USER,AUTH_EVENTS) {
 	return {
 		request: function(config) {
+//			console.log('请求中'+new Date())
 			var username = $cookies.get(USER.user_name);
             if (config.url.indexOf('admin_login')>-1||config.url.indexOf('admin_regist')>-1 || config.url.indexOf('.html')>-1) {
              	return config;
@@ -87,6 +81,7 @@ angular.module('app', [
 			return config;
 		},
 		response:function(response){
+//			console.log('请求结束'+new Date())
 			return response;
 		},
 		responseError: function(response) {

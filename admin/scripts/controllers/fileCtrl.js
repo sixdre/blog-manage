@@ -17,6 +17,7 @@ angular.module('app').controller('fileCtrl',
 	
 	$scope.uploadFile=function(){
 		fileService.uploadFile($scope.file).then(function(res) {
+			
 			if(res.data.code==1){
 				alertService.success(res.data.message);
 			}else{

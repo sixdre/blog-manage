@@ -15,8 +15,8 @@ angular.module('app').factory('catetagService',['$http','$q',function($http,$q){
 
 	var api={
 		category:{
-			list:function(){
-				return handelRequest("GET",'/api/category');
+			list:function(params){
+				return handelRequest("GET",'/api/category',params);
 			},
 			add:function(data){
 				return handelRequest("POST",'/api/category',{category:data});

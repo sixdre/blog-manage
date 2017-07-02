@@ -3,8 +3,64 @@
    <h1 class="m-n font-thin h3">友链管理</h1>
 </div>
 <div class="wrapper-md">
-	<div class="clearfix">
-		<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			友情链接列表
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped b-t b-light">
+				<thead>
+					<tr>
+						<th style="width:20px;">
+							<label class="i-checks m-b-none">
+				                	<input type="checkbox"><i></i>
+				              </label>
+						</th>
+						<th>链接名称</th>
+						<th>链接地址</th>
+						<th>链接排序</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				 	<tr ng-repeat="friend in Friends | orderBy:'meta.update_time':true">
+				 		<td>
+				 			<label class="i-checks m-b-none">
+								<input type="checkbox" ng-checked="select_all" ng-model="item_checked" ng-click="selectOne(item._id)">
+								<i></i>
+							</label>
+				 		</td>
+			               <td>{{friend.title}}</td>
+						<td>
+							<a href="{{friend.url}}" target="_blank">{{friend.url}}</a>
+						</td>
+						<td>{{friend.sort}}</td>
+						<td>
+							<a href="javascript:void(0)" ng-click="editFriend(friend);" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> <span>编辑</span></a>
+							<a href="javascript:void(0)" ng-click="delFriend(friend);" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> <span>删除</span></a>
+						</td>
+			          </tr>
+				</tbody>
+			</table>
+		</div>
+		<footer class="panel-footer">
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<small class="text-muted inline m-t-sm m-b-sm">showing {{StartNum}}-{{EndNum}} of {{pageConfig.totalItems}} items</small>
+				</div>
+				<div class="col-sm-8 text-right text-center-xs">
+					<ul uib-pagination total-items="pageConfig.totalItems" 
+						items-per-page="pageConfig.limit" max-size="pageConfig.maxSize" 
+						boundary-links="true" rotate="true" num-pages="numPages"
+						previous-text="上一页" next-text="下一页" 
+						ng-model="pageConfig.currentPage" 
+						ng-change="loadData()">
+					</ul>
+				</div>
+			</div>
+		</footer>
+		
+		<!--<div class="col-md-12">
 			<table class="table table-striped table-bordered table-responsive">
 	            <thead>
 	            <tr>
@@ -26,7 +82,7 @@
 	            </tr>
 	            </tbody>
 	        </table>
-	    </div>
+	    </div>-->
         <div class="col-md-12" style="padding: 20px;">
             <div class="panel">
                 <div class="panel-heading">
