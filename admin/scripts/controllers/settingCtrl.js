@@ -13,6 +13,10 @@ angular.module('app').controller('settingCtrl',
 				alertService.success('添加成功!').then(function(){
 					
 				})
+			}else{
+				alertService.error(data.message).then(function(){
+					
+				})
 			}
 		}).catch(function(err){
 			

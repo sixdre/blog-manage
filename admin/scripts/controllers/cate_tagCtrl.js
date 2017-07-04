@@ -107,7 +107,7 @@ angular.module('app')
 	}
 	//更新分类
 	$scope.updateCategory=function(){
-		catetagService.category.update($scope.category).then(function(res){
+		catetagService.category.update($scope.category._id,$scope.category).then(function(res){
 			if(res.data.code==-1){
 				defPopService.defPop({
 					status:0,
@@ -178,7 +178,7 @@ angular.module('app')
 	
 	//更新标签
 	$scope.updateTag=function(){
-		catetagService.tag.update($scope.tag).then(function(res){
+		catetagService.tag.update($scope.tag._id,$scope.tag).then(function(res){
 			if(res.data.code==-1){
 				defPopService.defPop({
 					status:0,

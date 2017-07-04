@@ -37,11 +37,9 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 					if($scope.article.img && $scope.article.img.length) {
 						$scope.haveImg = true;
 					}
-					
 					uetrue.addListener("ready", function() {
 						uetrue.setContent($scope.article.tagcontent);
 					});
-					
 				}
 			}).catch(function(err){
 				defPopService.defPop({
@@ -71,14 +69,16 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			article.tagcontent = UE.getEditor('editor').getContent();
 			article.content = UE.getEditor('editor').getContentTxt();
 
-			articleService.update({
+			articleService.update(article._id,{
 				cover: $scope.file,
 				article: article
 			}).then(function(res) {
-				if(res.data.code > 0) {
+				if(res.data.code ==1) {
 					alertService.success('更新成功').then(function(){
 						$state.go('app.article.list');
 					})
+				}else{
+					alertService.error(res.data.message);
 				}
 			}, function(resp) {
 				alertService.error('更新失败!');
@@ -100,13 +100,6 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			var article = angular.copy($scope.article);
 			article.content=UE.getEditor('editor').getContentTxt();
 			article.tagcontent=UE.getEditor('editor').getContent();
-//			var article = {
-//				title: $scope.article.title,
-//				category: $scope.article.category,
-//				tags: $scope.article.tags,
-//				content: UE.getEditor('editor').getContentTxt(),
-//				tagcontent: UE.getEditor('editor').getContent()
-//			}
 			if(!article.content.trim().length) {
 				return defPopService.defPop({
 					status: 0,
@@ -125,7 +118,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 					DataService.ArticleTotal += 1;
 					$scope.article = {};
 					$scope.file = null;
-				}else if(res.data.code ==-2){
+				}else{
 					alertService.error(res.data.message);
 				}
 			}, function(resp) {
@@ -134,7 +127,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 					content: "出错了！"
 				});
 			}, function(evt) {
-				//console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
+				
 			});
 		}
 	}

@@ -31,7 +31,7 @@ angular.module('app').factory('articleService',['$http','$resource','$q','Upload
 		}
 		return $http(config);
 	}
-	var Article=$resource('/api/article/:id/publish',{id:'@id'});
+	var Article=$resource('/api/articles/:id/publish',{id:'@id'});
 	
 	return {
 //		testGetDataByResource:function(){
@@ -60,41 +60,29 @@ angular.module('app').factory('articleService',['$http','$resource','$q','Upload
 		},
 		publish:function(data){			//文章发布
 			return Upload.upload({
-				url: '/api/article',
+				url: '/api/articles',
 				data: data
 			})
 		},
-		update:function(data){		//文章更新
+		update:function(id,data){		//文章更新
 			return Upload.upload({
-				url: '/api/article',
+				url: '/api/articles/'+id,
 				method:"PUT",
 				data:data
 			})
 		},
 		removeOne:function(id){		//文章单选删除
-			return handelRequest("DELETE",'/api/article/'+id);
+			return handelRequest("DELETE",'/api/articles/'+id);
 		},
 		removeMulti:function(ids){	//文章多选删除
-			return handelRequest("POST",'/api/article/removeMulti',{ids:ids});
+			return handelRequest("POST",'/api/articles/removeMulti',{ids:ids});
 		},
 		search:function(title){		//搜索文章
-			return handelRequest("GET",'/api/article/search',{title:title});
+			return handelRequest("GET",'/api/articles/search',{title:title});
 		},
 		findById:function(id){
-			return handelRequest("GET",'/api/article/'+id);
+			return handelRequest("GET",'/api/articles/'+id);
 		}
-//		save:function(data){
-//			return $http({
-//				method:"POST",
-//				url:'/api/article/sub',
-//				data:data,
-//				headers: {'Content-Type':undefined},
-//        		transformRequest:angular.identity   
-//			});
-//		},
-//		findById:function(id){
-//			return handelRequest("GET",'/api/article/'+id);
-//		}
 	}
 	
 }])

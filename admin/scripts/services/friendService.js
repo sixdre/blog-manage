@@ -17,16 +17,16 @@ angular.module('app').factory('friendService',['$http','$q',function($http,$q){
 	
 	return {
 		list:function(params){			
-			return handelRequest("GET","/api/friend",params);
+			return handelRequest("GET","/api/friends",params);
 		},
 		add:function(data){
-			return handelRequest("POST","/api/friend",data);
+			return handelRequest("POST","/api/friends",data);
 		},
-		update:function(data){
-			return handelRequest("PUT","/api/friend",data);
+		update:function(id,data){
+			return handelRequest("PUT","/api/friends/"+id,data);
 		},
 		remove:function(id){
-			return handelRequest("DELETE","/api/friend/"+id);
+			return handelRequest("DELETE","/api/friends/"+id);
 		},
 	}
 	

@@ -16,31 +16,31 @@ angular.module('app').factory('catetagService',['$http','$q',function($http,$q){
 	var api={
 		category:{
 			list:function(params){
-				return handelRequest("GET",'/api/category',params);
+				return handelRequest("GET",'/api/categories',params);
 			},
 			add:function(data){
-				return handelRequest("POST",'/api/category',{category:data});
+				return handelRequest("POST",'/api/categories',data);
 			},
-			update:function(data){
-				return handelRequest("PUT",'/api/category',{category:data});
+			update:function(id,data){
+				return handelRequest("PUT",'/api/categories/'+id,data);
 			},
 			remove:function(id){
-				return handelRequest("DELETE",'/api/category/'+id);
+				return handelRequest("DELETE",'/api/categories/'+id);
 			}
 			
 		},
 		tag:{
 			list:function(){
-				return handelRequest("GET",'/api/tag');
+				return handelRequest("GET",'/api/tags');
 			},
 			add:function(data){
-				return handelRequest("POST",'/api/tag',{tag:data});
+				return handelRequest("POST",'/api/tags',data);
 			},
-			update:function(data){
-				return handelRequest("PUT",'/api/tag',{tag:data});
+			update:function(id,data){
+				return handelRequest("PUT",'/api/tags/'+id,data);
 			},
 			remove:function(id){
-				return handelRequest("DELETE",'/api/tag/'+id);
+				return handelRequest("DELETE",'/api/tags/'+id);
 			}
 		}
 	}

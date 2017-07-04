@@ -59,7 +59,7 @@ angular.module('app').controller('friendCtrl',
 	}
 	
 	$scope.updateFriend=function(item){
-		friendService.update(item).then(function(res){
+		friendService.update(item._id,item).then(function(res){
 			if(res.data.code==1){
 				alertService.success(res.data.message);
 				$scope.friend={};
