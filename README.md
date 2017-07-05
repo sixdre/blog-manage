@@ -10,7 +10,7 @@
 
 >  如果对您对此项目有兴趣，可以点 "Star" 支持一下 谢谢！ ^_^
 
->  部署环境 阿里云 CentOS 7.2 64位 
+>  线上部署环境 Aliyun Linux 17.1 64位 
 
 
 ## 技术栈
@@ -18,6 +18,24 @@
 AngularJs + ui-router + angular-ui-bootstrap + bootstrap
 
 
+## 项目运行
+
+```
+git clone https://github.com/sixdre/blog-manage  
+
+cd blog-manage
+
+npm install 这里推荐使用淘宝的npm镜像   输入npm install -g cnpm --registry=https://registry.npm.taobao.org 进行安装
+
+npm install -g bower 或者cnpm install -g bower 安装bower
+
+npm install -g gulp 或者cnpm install -g gulp 安装gulp
+
+bower install 安装项目需要的模块
+
+运行gulp 启动项目, 运行gulp build 进行项目的打包
+
+```
 
 # 效果演示
 
