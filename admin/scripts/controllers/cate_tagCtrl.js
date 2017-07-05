@@ -12,30 +12,41 @@ angular.module('app')
 	function getCategorys(){
 		catetagService.category.list().then(function(res){
 			if(res.data.code==1){
-				DataService.Categorys=res.data.categorys;
+				DataService.Categorys=res.data.categories;
 			}else{
-				alert('获取类型失败')
+				defPopService.defPop({
+					status:0,
+					content:res.data.message
+				});
 			}
 		}).catch(function(){
-			
+			defPopService.defPop({
+				status:0,
+				content:'服务器错误'
+			});
 		});
 	}
 	getCategorys();
+	
 	//获取类型列表
 	function getTags(){
 		catetagService.tag.list().then(function(res){
 			if(res.data.code==1){
 				DataService.Tags=res.data.tags;
 			}else{
-				alert('获取标签失败')
+				defPopService.defPop({
+					status:0,
+					content:res.data.message
+				});
 			}
 		}).catch(function(){
-			
+			defPopService.defPop({
+				status:0,
+				content:'服务器错误'
+			});
 		})
 	}
 	getTags();
-	
-
 	
 	//修改
 	$scope.revise=function(type,data){
@@ -48,54 +59,25 @@ angular.module('app')
 			$scope.istNew=false;
 		}
 	}
-	
-	//分类和标签的删除
-//	$scope.remove=function(type,item){			
-//		if(type=="category"){				//删除分类
-//			alertService.confirm().then(function(){
-//				catetagService.category.remove(item._id).then(function(res){
-//					if(res.data.code==1){
-//						alertService.success();
-//						DataService.Categorys.splice(DataService.Categorys.indexOf(item), 1);
-//					}
-//				}).catch(function(){
-//					
-//				});
-//			},function(){
-//				
-//			})
-//		}else if(type="tag"){				//删除标签
-//			alertService.confirm().then(function(){
-//				catetagService.tag.remove(item._id).then(function(res){
-//					if(res.data.code==1){
-//						alertService.success();
-//						DataService.Tags.splice(DataService.Tags.indexOf(item), 1);
-//					}
-//				}).catch(function(){
-//					
-//				});
-//			},function(){
-//				
-//			})
-//		}					
-//	}
+
 	
 	//添加分类
 	$scope.addCategory=function(){
 		catetagService.category.add($scope.category).then(function(res){
-			if(res.data.code==-1){
-				defPopService.defPop({
-					status:0,
-					content:"已有此类型，不可重复添加"
-				});
-			}else if(res.data.code==1){
+			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
 					content:res.data.message,
 					callback:function(){
-						DataService.Categorys.push(res.data.category);
+						getCategorys()
+//						DataService.Categorys.push(res.data.category);
 						$scope.category={};
 					}
+				});
+			}else{
+				defPopService.defPop({
+					status:0,
+					content:res.data.message
 				});
 			}
 		}).catch(function(){
@@ -108,12 +90,7 @@ angular.module('app')
 	//更新分类
 	$scope.updateCategory=function(){
 		catetagService.category.update($scope.category._id,$scope.category).then(function(res){
-			if(res.data.code==-1){
-				defPopService.defPop({
-					status:0,
-					content:"已有此类型，不可重复添加"
-				});
-			}else if(res.data.code==1){
+			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
 					content:res.data.message,
@@ -122,6 +99,11 @@ angular.module('app')
 						getCategorys();
 						$scope.category={};
 					}
+				});
+			}else{
+				defPopService.defPop({
+					status:0,
+					content:res.data.message
 				});
 			}
 		}).catch(function(){
@@ -136,7 +118,7 @@ angular.module('app')
 		alertService.confirm().then(function(){
 			catetagService.category.remove(item._id).then(function(res){
 				if(res.data.code==1){
-					alertService.success('删除成功');
+					alertService.success(res.data.message);
 					DataService.Categorys.splice(DataService.Categorys.indexOf(item), 1);
 				}
 			}).catch(function(){
@@ -148,24 +130,23 @@ angular.module('app')
 		});
 	}
 	
-	
-	
 	//添加标签
 	$scope.addTag=function(){
 		catetagService.tag.add($scope.tag).then(function(res){
-			if(res.data.code==-1){
-				defPopService.defPop({
-					status:0,
-					content:"已有此类型，不可重复添加"
-				});
-			}else if(res.data.code==1){
+			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
 					content:"添加成功",
 					callback:function(){
-						DataService.Tags.push(res.data.tag);
+						//DataService.Tags.push(res.data.tag);
+						getTags();
 						$scope.tag={};
 					}
+				});
+			}else{
+				defPopService.defPop({
+					status:0,
+					content:res.data.message
 				});
 			}
 		}).catch(function(){
@@ -179,12 +160,7 @@ angular.module('app')
 	//更新标签
 	$scope.updateTag=function(){
 		catetagService.tag.update($scope.tag._id,$scope.tag).then(function(res){
-			if(res.data.code==-1){
-				defPopService.defPop({
-					status:0,
-					content:"已有此类型，不可重复添加"
-				});
-			}else if(res.data.code==1){
+			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
 					content:"更新成功",
@@ -193,6 +169,11 @@ angular.module('app')
 						getTags();
 						$scope.tag={};
 					}
+				});
+			}else{
+				defPopService.defPop({
+					status:0,
+					content:res.data.message
 				});
 			}
 		}).catch(function(){
@@ -218,92 +199,16 @@ angular.module('app')
 			});
 		});
 	}
-	
-	
-	//分类或者标签的保存
-//	$scope.add=function(type){				//保存分类
-//		if(type=="category"){
-//			catetagService.category.add($scope.category).then(function(res){
-//				if(res.data.code==-1){
-//					defPopService.defPop({
-//						status:0,
-//						content:"已有此类型，不可重复添加"
-//					});
-//				}else if(res.data.code==1){
-//					defPopService.defPop({
-//						status:1,
-//						content:"添加成功",
-//						callback:function(){
-//							DataService.Categorys.push(res.data.category);
-//							$scope.category={};
-//						}
-//					});
-//				}else if(res.data.code==2){
-//					defPopService.defPop({
-//						status:1,
-//						content:"修改成功",
-//						callback:function(){
-//							$scope.iscNew=true;
-//							getCategorys();
-//							$scope.category={};
-//						}
-//					});
-//				}
-//			}).catch(function(){
-//				
-//			});
-//		}else if(type=="tag"){				//保存标签
-//			catetagService.tag.add($scope.tag).then(function(res){
-//				if(res.data.code==-1){
-//					defPopService.defPop({
-//						status:0,
-//						content:"已有此类型，不可重复添加"
-//					});
-//				}else if(res.data.code==1){
-//					defPopService.defPop({
-//						status:1,
-//						content:"添加成功",
-//						callback:function(){
-//							DataService.Tags.push(res.data.tag);
-//							$scope.tag={};
-//						}
-//					});
-//				}else if(res.data.code==2){
-//					defPopService.defPop({
-//						status:1,
-//						content:"修改成功",
-//						callback:function(){
-//							$scope.istNew=true;
-//							$scope.tag={};
-//							getTags();
-//						}
-//					});
-//				}
-//			}).catch(function(){
-//				
-//			});
-//		}
-//	}	
 
-	
 	//取消
 	$scope.cancel=function(type){
 		if(type=="category"){
 			$scope.iscNew = true;  
             $scope.category={};
-//			 $timeout(function(){  
-//              $scope.iscNew = true;  
-//              $scope.category={};
-//              $scope.$apply();
-//          },10);  
 		}else if(type=="tag"){
 			$scope.istNew=true;
 			$scope.tag={};
 		}
 	}
-	
-	
-	
-	
 	
 }]);

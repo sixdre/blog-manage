@@ -30,7 +30,8 @@
 					<form id="cform" name="cform" class="form-inline" role="form">
 						<input type="hidden" id="mid">
 						<div class="form-group">
-							<input type="text" class="form-control" ng-model="category.name" placeholder="请输入分类名称" required="required">
+							<input type="text" name="categoryName" ng-blur="cfocus=false" ng-focus="cfocus=true" class="form-control" ng-model="category.name" placeholder="请输入分类名称" required="required">
+							<p class="has-feedback text-danger" ng-show="cfocus">支持多个分类添加,每个分类之间用"/"隔开</p>
 						</div>
 						<button ng-if="iscNew" type="button" class="btn btn-success" ng-disabled="cform.$invalid" ng-click="addCategory();">保存分类
 	                    </button>
@@ -67,7 +68,8 @@
 					<form id="tform" name="tform" class="form-inline" role="form">
 						<input type="hidden">
 						<div class="form-group">
-							<input type="text" class="form-control" ng-model="tag.name" placeholder="请输入标签名称" required="required">
+							<input type="text"  ng-blur="tfocus=false" ng-focus="tfocus=true" class="form-control" ng-model="tag.name" placeholder="请输入标签名称" required="required">
+							<p class="has-feedback text-danger" ng-show="tfocus">支持多个标签添加,每个标签之间用"/"隔开</p>
 						</div>
 						<button ng-if="istNew" type="button" class="btn btn-success" ng-disabled="tform.$invalid" ng-click="addTag();">保存标签
 	                    </button>
