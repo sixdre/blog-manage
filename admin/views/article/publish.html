@@ -65,7 +65,7 @@
 			<button type="submit" ng-hide="isUpdate" class="btn btn-primary waves-effect waves-light" ng-click="publish()">
                                               发表文章
             </button>
-            <label class="i-checks m-b-none" style="margin-right:20px;" ng-show="article.isDraft||article.isDeleted">
+            <label class="i-checks m-b-none" style="margin-right:20px;" ng-show="article.status == 1||article.status==0">
                 <input type="checkbox" ng-model="isFormal">
                 <i></i>
               	  标为有效

@@ -63,8 +63,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			}
 			var article = angular.copy($scope.article);
 			if($scope.isFormal) {
-				article.isDraft = false;
-				article.isDeleted = false;
+				article.status  = 2;
 			}
 			article.tagcontent = UE.getEditor('editor').getContent();
 			article.content = UE.getEditor('editor').getContentTxt();
@@ -160,7 +159,7 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 		};
 		$scope.checkedIds = []; //id组用来存放选中的文章id
 
-		$scope.flag = 0;
+		$scope.flag = 3;
 
 		//分页加载数据
 		$scope.loadData = function() {
