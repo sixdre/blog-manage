@@ -68,6 +68,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			article.tagcontent = UE.getEditor('editor').getContent();
 			article.content = UE.getEditor('editor').getContentTxt();
 
+
 			articleService.update(article._id,{
 				cover: $scope.file,
 				article: article
@@ -99,6 +100,8 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			var article = angular.copy($scope.article);
 			article.content=UE.getEditor('editor').getContentTxt();
 			article.tagcontent=UE.getEditor('editor').getContent();
+			
+
 			if(!article.content.trim().length) {
 				return defPopService.defPop({
 					status: 0,
