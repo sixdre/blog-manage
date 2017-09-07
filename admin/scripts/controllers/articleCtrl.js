@@ -145,11 +145,11 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 		$http, $log, $uibModal, articleService,
 		defPopService, alertService, toolService, DataService) {
 
-		var currentPage = $stateParams.page;
-		if(currentPage == ""||currentPage==undefined) {
-			currentPage = 1;
+		var page = $stateParams.page;
+		if(page == ""||page==undefined) {
+			page = 1;
 		} else {
-			currentPage = parseInt(currentPage);
+			page = parseInt(page);
 		}
 		
 		//分页配置参数
@@ -158,7 +158,7 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 			limit: 5, 		//每页显示的文章数
 			pageSizes: [5, 10, 20], //每页显示的文章数量下拉列表
 			totalItems: DataService.ArticleTotal, //文章总数
-			currentPage: currentPage, //当前页
+			page: page, //当前页
 		};
 		$scope.checkedIds = []; //id组用来存放选中的文章id
 
@@ -168,7 +168,7 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 		$scope.loadData = function() {
 
 			var queryParams = {
-				currentPage: $scope.pageConfig.currentPage,
+				page: $scope.pageConfig.page,
 				limit: $scope.pageConfig.limit,
 				title: $scope.title,
 				flag: $scope.flag
@@ -176,8 +176,8 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 			$scope.ArticlePromise=articleService.getData(queryParams).then(function(res) {
 				$scope.articleList = res.data.articles; //文章列表
 				$scope.pageConfig.totalItems = res.data.total;
-				$scope.StartNum = ($scope.pageConfig.currentPage - 1) * $scope.pageConfig.limit + 1;
-				var End = $scope.pageConfig.currentPage * $scope.pageConfig.limit;
+				$scope.StartNum = ($scope.pageConfig.page - 1) * $scope.pageConfig.limit + 1;
+				var End = $scope.pageConfig.page * $scope.pageConfig.limit;
 				$scope.EndNum = End < $scope.pageConfig.totalItems ? End : $scope.pageConfig.totalItems;
 
 			}).catch(function(err) {
@@ -192,14 +192,14 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 
 		//根据标题查询
 		$scope.queryByTitle = function() {
-			$scope.pageConfig.currentPage = 1;
+			$scope.pageConfig.page = 1;
 			$scope.loadData();
 		}
 
 		//检测类型，发生改变重新加载数据
 		$scope.$watch('flag', function(newVal, oldVal) {
 			if(newVal !== oldVal) {
-				$scope.pageConfig.currentPage = 1;
+				$scope.pageConfig.page = 1;
 				$scope.loadData();
 			}
 		})
