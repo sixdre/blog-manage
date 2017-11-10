@@ -6,7 +6,7 @@ app.controller('SignupFormController', [
 	$scope.user = {};
 	$scope.authError = null;
 	$scope.signup = function() {
-		$http.post('/api/user/admin_regist', { 
+		$http.post('/api/admin_regist', { 
 			username: $scope.user.username, 
 			email: $scope.user.email, 
 			password: $scope.user.password })

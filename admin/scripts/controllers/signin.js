@@ -9,7 +9,7 @@ function($rootScope, $scope,$cookies,$http, $state,USER,AUTH_EVENTS) {
 	var expireDate = new Date();
     expireDate.setMinutes(expireDate.getMinutes()+10*6);		//一小时
 	$scope.login = function() {
-		$http.post('/api/user/admin_login', { 
+		$http.post('/api/admin_login', { 
 			username: $scope.user.username, 
 			password: $scope.user.password })
 			.then(function(res) {
