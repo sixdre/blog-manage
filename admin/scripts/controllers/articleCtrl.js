@@ -235,16 +235,13 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 		$scope.selectOne = function(id) {
 			toolService.addSelect($scope.checkedIds, id);
 		}
-		//多选或单选删除
-		$scope.removeMulti = function() {
-			if($scope.checkedIds.length == 0) {
-				return defPopService.defPop({
-					status: 0,
-					content: "请选择要删除的文章！"
-				});
-			}
+		
+
+		
+		//删除文章
+		$scope.remove = function(ids){
 			alertService.confirm().then(function() {
-				articleService.removeMulti($scope.checkedIds).then(function(res) {
+				articleService.remove(ids).then(function(res) {
 					if(res.data.code > 0) {
 						alertService.success('删除成功');
 						$scope.loadData();
@@ -260,26 +257,24 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 				
 			})
 		}
-
+		
 		//图标点击删除 单个删除
 		$scope.removeOne = function(id) {
-			alertService.confirm().then(function() {
-				articleService.removeOne(id).then(function(res) {
-					if(res.data.code == 1) {
-						alertService.success(res.data.message);
-						$scope.loadData();
-					}
-				}).catch(function(err) {
-					console.log(err);
-					defPopService.defPop({
-						status: 0,
-						content: "删除失败服务器错误！"
-					});
-				})
-			},function(){
-				
-			});
+			$scope.remove(id)
 		};
+
+		//多选或单选删除
+		$scope.removeMulti = function() {
+			if($scope.checkedIds.length == 0) {
+				return defPopService.defPop({
+					status: 0,
+					content: "请选择要删除的文章！"
+				});
+			}
+			var ids = $scope.checkedIds.toString();
+			$scope.remove(ids);
+		}
+
 
 		$scope.edit = function(item) {
 			$state.go('app.article.publish',{id:item._id});

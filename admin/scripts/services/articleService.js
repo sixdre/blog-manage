@@ -71,11 +71,8 @@ angular.module('app').factory('articleService',['$http','$resource','$q','Upload
 				data:data
 			})
 		},
-		removeOne:function(id){		//文章单选删除
-			return handelRequest("DELETE",'/api/articles/'+id);
-		},
-		removeMulti:function(ids){	//文章多选删除
-			return handelRequest("POST",'/api/articles/removeMulti',{ids:ids});
+		remove:function(ids){		//文章单选删除
+			return handelRequest("DELETE",'/api/articles/'+ids);
 		},
 		search:function(title){		//搜索文章
 			return handelRequest("GET",'/api/articles/search',{title:title});
