@@ -4,9 +4,9 @@ var uetrue = null;
  * 文章发布控制器
  */
 app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$stateParams",'$localStorage',
-				'$timeout', '$interval','articleService', "defPopService", "alertService", 'DataService',
+				'$timeout', '$interval',"defPopService", "alertService", 'DataService','apiService',
 	function($rootScope, $scope,$state, $stateParams,$localStorage,$timeout,$interval,
-		articleService, defPopService, alertService, DataService) {
+		defPopService, alertService, DataService,apiService) {
 		
 		if(uetrue) {
 			uetrue.destroy();
@@ -30,7 +30,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 		
 		
 		if($stateParams.id){
-			articleService.findById($stateParams.id).then(function(res){
+			apiService.getArticleById($stateParams.id).then(function(res){
 				if(res.data.code==1){
 					$scope.isUpdate=true;
 					$scope.article=res.data.article;
@@ -69,7 +69,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			article.content = UE.getEditor('editor').getContentTxt();
 
 
-			articleService.update(article._id,{
+			apiService.updateArticle(article._id,{
 				cover: $scope.file,
 				article: article
 			}).then(function(res) {
@@ -111,7 +111,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			if(state && state == "draft") { //存为草稿
 				article.isDraft = true; //为草稿
 			}
-			articleService.publish({
+			apiService.createArticle({
 				cover: $scope.file,
 				article: article
 			}).then(function(res) {
@@ -139,11 +139,11 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
  * 文章列表管理控制器
  */
 app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParams',
-	'$http', '$log', '$uibModal', 'articleService',
-	'defPopService', 'alertService', 'toolService', 'DataService',
+	'$http', '$log', '$uibModal', 
+	'defPopService', 'alertService', 'toolService', 'DataService','apiService',
 	function($rootScope, $scope,$state, $stateParams,
-		$http, $log, $uibModal, articleService,
-		defPopService, alertService, toolService, DataService) {
+		$http, $log, $uibModal,
+		defPopService, alertService, toolService, DataService,apiService) {
 
 		var page = $stateParams.page;
 		if(page == ""||page==undefined) {
@@ -173,7 +173,7 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 				title: $scope.title,
 				flag: $scope.flag
 			}
-			$scope.ArticlePromise=articleService.getData(queryParams).then(function(res) {
+			$scope.ArticlePromise=apiService.getArticles(queryParams).then(function(res) {
 				$scope.articleList = res.data.articles; //文章列表
 				$scope.pageConfig.totalItems = res.data.total;
 				$scope.StartNum = ($scope.pageConfig.page - 1) * $scope.pageConfig.limit + 1;
@@ -241,7 +241,7 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 		//删除文章
 		$scope.remove = function(ids){
 			alertService.confirm().then(function() {
-				articleService.remove(ids).then(function(res) {
+				apiService.removeArticle(ids).then(function(res) {
 					if(res.data.code > 0) {
 						alertService.success('删除成功');
 						$scope.loadData();

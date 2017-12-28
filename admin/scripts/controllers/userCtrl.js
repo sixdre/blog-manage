@@ -1,6 +1,6 @@
 angular.module('app').controller('userCtrl',
-		['$scope','defPopService','alertService','userService',
-		 	function($scope,defPopService,alertService,userService){
+		['$scope','defPopService','alertService','apiService',
+		 	function($scope,defPopService,alertService,apiService){
 		 		
 		 		
 	$scope.totalServerItems = 0;
@@ -13,7 +13,7 @@ angular.module('app').controller('userCtrl',
 	 * getUsers 获取用户
 	 */
 	function getUsers(){
-		userService.getUsers().then(function(res){
+		apiService.getUsers().then(function(res){
 			$scope.Users=res.data.users;
 			$scope.totalServerItems=res.data.users.length;
 		}).catch(function(err){

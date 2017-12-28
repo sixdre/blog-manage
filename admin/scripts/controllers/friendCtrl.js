@@ -1,6 +1,6 @@
 angular.module('app').controller('friendCtrl',
-		['$scope','defPopService','alertService','friendService',
-		 	function($scope,defPopService,alertService,friendService){
+		['$scope','defPopService','alertService','apiService',
+		 	function($scope,defPopService,alertService,apiService){
 
 	$scope.isNewHandle=true;			//判断当前是新增友链还是更新友链
 	
@@ -8,7 +8,7 @@ angular.module('app').controller('friendCtrl',
 	 * getFriends 加载友情链接
 	 * */
 	function getFriends(){
-		friendService.list({page:1,limit:10}).then(function(res){
+		apiService.getFriends({page:1,limit:10}).then(function(res){
 			$scope.Friends=res.data.friends;
 		}).catch(function(err){
 			alertService.error('获取友链数据失败,服务器错误');
@@ -19,7 +19,7 @@ angular.module('app').controller('friendCtrl',
 	 * addfriend 添加友情链接
 	 * */
 	$scope.addFriend=function(obj){
-		friendService.add(obj).then(function(res){
+		apiService.createFrined(obj).then(function(res){
 			if(res.data.code>0){
 				$scope.friend={};
 				$scope.Friends.push(res.data.friend);
@@ -38,7 +38,7 @@ angular.module('app').controller('friendCtrl',
 	 * */
 	$scope.delFriend=function(item){	
 		alertService.confirm().then(function(){
-			friendService.remove(item._id).then(function(res){
+			apiService.removeFrined(item._id).then(function(res){
 				if(res.data.code==1){
 					alertService.success(res.data.message);
 					$scope.Friends.splice($scope.Friends.indexOf(item), 1);
@@ -59,7 +59,7 @@ angular.module('app').controller('friendCtrl',
 	}
 	
 	$scope.updateFriend=function(item){
-		friendService.update(item._id,item).then(function(res){
+		apiService.updateFrined(item._id,item).then(function(res){
 			if(res.data.code==1){
 				alertService.success(res.data.message);
 				$scope.friend={};

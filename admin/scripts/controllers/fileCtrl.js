@@ -1,13 +1,13 @@
 angular.module('app').controller('fileCtrl',
-		['$scope','Upload','defPopService','alertService','fileService',
-		 	function($scope,Upload,defPopService,alertService,fileService){
+		['$scope','Upload','defPopService','alertService','apiService',
+		 	function($scope,Upload,defPopService,alertService,apiService){
 	
 	$scope.isUploadStatus=false;		//判断是否是上传状态
 	/*
 	 * getAllFiles 获取所有文件列表
 	 */
 	function getAllFiles(){
-		fileService.getAllFiles().then(function(res){
+		apiService.getAllFiles().then(function(res){
 			$scope.files=res.data.files;
 		}).catch(function(err){
 			
@@ -21,7 +21,7 @@ angular.module('app').controller('fileCtrl',
 			return ;
 		}
 		$scope.isUploadStatus=true;
-		fileService.uploadFile($scope.file).then(function(res) {
+		apiService.uploadFile($scope.file).then(function(res) {
 			$scope.isUploadStatus=false;
 			if(res.data.code==1){
 				alertService.success(res.data.message);

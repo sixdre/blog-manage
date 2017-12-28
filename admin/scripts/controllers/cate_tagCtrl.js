@@ -1,8 +1,8 @@
 angular.module('app')
 	.controller('CateTagCtrl',
 			['$rootScope','$scope','$timeout','$window','defPopService',
-			'alertService','catetagService','toolService','DataService',
-   function($rootScope,$scope,$timeout,$window,defPopService,alertService,catetagService,toolService,DataService){
+			'alertService','apiService','toolService','DataService',
+   function($rootScope,$scope,$timeout,$window,defPopService,alertService,apiService,toolService,DataService){
 	
 	
 	$scope.iscNew=true;   //判断类型是更新还是添加
@@ -10,7 +10,7 @@ angular.module('app')
 
 	//获取类型列表
 	function getCategorys(){
-		catetagService.category.list().then(function(res){
+		apiService.getCategories().then(function(res){
 			if(res.data.code==1){
 				DataService.Categorys=res.data.categories;
 			}else{
@@ -30,7 +30,7 @@ angular.module('app')
 	
 	//获取类型列表
 	function getTags(){
-		catetagService.tag.list().then(function(res){
+		apiService.getTags().then(function(res){
 			if(res.data.code==1){
 				DataService.Tags=res.data.tags;
 			}else{
@@ -63,7 +63,7 @@ angular.module('app')
 	
 	//添加分类
 	$scope.addCategory=function(){
-		catetagService.category.add($scope.category).then(function(res){
+		apiService.createCategory($scope.category).then(function(res){
 			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
@@ -89,7 +89,7 @@ angular.module('app')
 	}
 	//更新分类
 	$scope.updateCategory=function(){
-		catetagService.category.update($scope.category._id,$scope.category).then(function(res){
+		apiService.updateCategory($scope.category._id,$scope.category).then(function(res){
 			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
@@ -116,7 +116,7 @@ angular.module('app')
 	//删除分类
 	$scope.removeCategory=function(item){
 		alertService.confirm().then(function(){
-			catetagService.category.remove(item._id).then(function(res){
+			apiService.removeCategory(item._id).then(function(res){
 				if(res.data.code==1){
 					alertService.success(res.data.message);
 					DataService.Categorys.splice(DataService.Categorys.indexOf(item), 1);
@@ -132,7 +132,7 @@ angular.module('app')
 	
 	//添加标签
 	$scope.addTag=function(){
-		catetagService.tag.add($scope.tag).then(function(res){
+		apiService.createTag($scope.tag).then(function(res){
 			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
@@ -159,7 +159,7 @@ angular.module('app')
 	
 	//更新标签
 	$scope.updateTag=function(){
-		catetagService.tag.update($scope.tag._id,$scope.tag).then(function(res){
+		apiService.updateTag($scope.tag._id,$scope.tag).then(function(res){
 			if(res.data.code==1){
 				defPopService.defPop({
 					status:1,
@@ -186,7 +186,7 @@ angular.module('app')
 	//删除标签
 	$scope.removeTag=function(item){
 		alertService.confirm().then(function(){
-			catetagService.tag.remove(item._id).then(function(res){
+			apiService.removeTag(item._id).then(function(res){
 				if(res.data.code==1){
 					alertService.success('删除成功');
 					DataService.Tags.splice(DataService.Tags.indexOf(item), 1);
