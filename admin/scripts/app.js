@@ -16,8 +16,8 @@ angular.module('app', [
     'ngFileUpload',
     "toaster",
     'cgBusy'
-]).run(['$rootScope', '$window', '$cookies', '$cookieStore', '$state', '$stateParams','USER',
-	function($rootScope, $window, $cookies, $cookieStore, $state, $stateParams,USER) {
+]).run(['$rootScope', '$window', '$cookies', '$cookieStore', '$state', '$stateParams','USER','auth',
+	function($rootScope, $window, $cookies, $cookieStore, $state, $stateParams,USER,auth) {
 		
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
@@ -26,22 +26,17 @@ angular.module('app', [
 		if(toState.name == 'access.signin' || toState.name == 'access.signup') {
 			return;
 		}
-		var username=$cookies.get(USER.user_name); //用户身份
-		if(!username){					//cookies 没有找到用户
-			event.preventDefault(); // 取消默认跳转行为
-			//记录被拦截的页面信息 当登录后再调至该页面
-			//失效时间
-			var expireDate = new Date();
-			expireDate.setMinutes(expireDate.getMinutes() + 10);
-			$cookies.put('rejectState', toState, { 'expires': expireDate });
-			$cookies.put('rejectParams', toParams, { 'expires': expireDate });
+//		var username=$cookies.get(USER.user_name); //用户身份
+		if(!auth.authenticated()){					//cookies 没有找到用户
+//			event.preventDefault(); // 取消默认跳转行为
+//			//记录被拦截的页面信息 当登录后再调至该页面
+//			//失效时间
+//			var expireDate = new Date();
+//			expireDate.setMinutes(expireDate.getMinutes() + 10);
+//			$cookies.put('rejectState', toState, { 'expires': expireDate });
+//			$cookies.put('rejectParams', toParams, { 'expires': expireDate });
 			$state.go("access.signin"); //跳转到登录界面
 			return;
-		}else{
-			//刷新cookie 失效时间
-			var expireDate = new Date();
-			expireDate.setMinutes(expireDate.getMinutes() + 10 * 6); //一小时
-			$cookies.put(USER.user_name, username, { 'expires': expireDate });
 		}
 	});
 
@@ -63,21 +58,23 @@ angular.module('app', [
 	return {
 		request: function(config) {
 //			console.log('请求中'+new Date())
-			var username = $cookies.get(USER.user_name);
+//			var username = $cookies.get(USER.user_name);
             if (config.url.indexOf('admin_login')>-1||config.url.indexOf('admin_regist')>-1 || config.url.indexOf('.html')>-1) {
              	return config;
             }
-            //用户身份标识
-            if(username){
-                  //刷新cookie 失效时间
-                  var expireDate = new Date();
-                  expireDate.setMinutes(expireDate.getMinutes()+10);
-                  $cookies.put(USER.user_name, username,{'expires': expireDate});
-                  return config;
-            }else {
-            	$rootScope.$broadcast(AUTH_EVENTS.notAuthorized,'请重新登录');
-              	return $q.reject('not login');
-            }
+
+            config.headers['x-access-token'] = sessionStorage.getItem(USER.user_token);
+//          //用户身份标识
+//          if(username){
+////                //刷新cookie 失效时间
+////                var expireDate = new Date();
+////                expireDate.setMinutes(expireDate.getMinutes()+10);
+////                $cookies.put(USER.user_name, username,{'expires': expireDate});
+//                return config;
+//          }else {
+//          	$rootScope.$broadcast(AUTH_EVENTS.notAuthorized,'请重新登录');
+//            	return $q.reject('not login');
+//          }
 			return config;
 		},
 		response:function(response){

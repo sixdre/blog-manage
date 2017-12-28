@@ -51,17 +51,6 @@ angular.module('app').controller('AppCtrl',
 			$scope.logout = function() {
 				$cookies.remove(USER.user_name);
 				$state.go("access.signin");
-//				$http({
-//					method: "GET",
-//					url: "/admin_logout"
-//				}).then(function(res) {
-//					if(res.data.code == 1) {
-//						alert('退出登陆成功')
-////						$state.go("access.signin");
-//					}
-//				}, function(err) {
-//
-//				})
 			}
 
 			//留言回复
