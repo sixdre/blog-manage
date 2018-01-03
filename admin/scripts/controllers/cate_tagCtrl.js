@@ -12,7 +12,7 @@ angular.module('app')
 	function getCategorys(){
 		apiService.getCategories().then(function(res){
 			if(res.data.code==1){
-				DataService.Categorys=res.data.categories;
+				DataService.Categorys=res.data.data;
 			}else{
 				defPopService.defPop({
 					status:0,
@@ -32,7 +32,7 @@ angular.module('app')
 	function getTags(){
 		apiService.getTags().then(function(res){
 			if(res.data.code==1){
-				DataService.Tags=res.data.tags;
+				DataService.Tags=res.data.data;
 			}else{
 				defPopService.defPop({
 					status:0,

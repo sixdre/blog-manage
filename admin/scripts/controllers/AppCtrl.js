@@ -2,18 +2,14 @@
 /*main Controllers */
 angular.module('app').controller('AppCtrl', 
 	['$rootScope', '$scope', '$location','$cookies','$localStorage', '$window',
-	'$http', '$state', '$uibModal','DataService', 'SETTINGS','AUTH_EVENTS','USER',
+	'$http', '$state', '$uibModal','DataService', 'SETTINGS','AUTH_EVENTS','USER','apiService',
 		function($rootScope, $scope,$location,$cookies, $localStorage, 
-			$window, $http, $state, $uibModal,DataService, SETTINGS,AUTH_EVENTS,USER) {
+			$window, $http, $state, $uibModal,DataService, SETTINGS,AUTH_EVENTS,USER,apiService) {
 			var Manager=$rootScope.Manager={};
 			
 			//向后台请求主页面要展示的数据（文章总数，未读留言）
-			function getCommonData(){
-				$http({ 
-					method: "GET",
-					url: "/admin/loadData"
-				}).then(function(res) {
-					console.log(res)
+			function getUserInfo(){
+				apiService.getUserInfo().then(function(res) {
 					DataService.ArticleTotal=res.data.articleTotal;
 					DataService.Words=res.data.words;
 					DataService.Categorys=res.data.categorys;
@@ -27,7 +23,7 @@ angular.module('app').controller('AppCtrl',
 			if($location.path().indexOf('signin')>-1||$location.path().indexOf('signup')>-1){
 				
 			}else{
-				getCommonData();
+				getUserInfo();
 			}
 			
 
@@ -38,7 +34,7 @@ angular.module('app').controller('AppCtrl',
 			$scope.$on(AUTH_EVENTS.loginSuccess,function(event,data){
 //				alert('欢迎您回来');
 				Manager.name=$cookies.get(USER.user_name);
-				getCommonData();
+				getUserInfo();
 			})
 			
 			//用户验证失败
@@ -46,6 +42,10 @@ angular.module('app').controller('AppCtrl',
 				$state.go('access.signin');
 			})
 
+			//用户验证失败
+			$scope.$on(AUTH_EVENTS.notAuthenticated,function(event,data){
+				$state.go('access.signin');
+			})
 
 			//退出登录
 			$scope.logout = function() {

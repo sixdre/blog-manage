@@ -33,7 +33,7 @@ app.controller('articlePublishCtrl', ['$rootScope', '$scope','$state', "$statePa
 			apiService.getArticleById($stateParams.id).then(function(res){
 				if(res.data.code==1){
 					$scope.isUpdate=true;
-					$scope.article=res.data.article;
+					$scope.article=res.data.data;
 					if($scope.article.img && $scope.article.img.length) {
 						$scope.haveImg = true;
 					}
@@ -174,7 +174,7 @@ app.controller('articleListCtrl', ['$rootScope', '$scope','$state', '$stateParam
 				flag: $scope.flag
 			}
 			$scope.ArticlePromise=apiService.getArticles(queryParams).then(function(res) {
-				$scope.articleList = res.data.articles; //文章列表
+				$scope.articleList = res.data.data; //文章列表
 				$scope.pageConfig.totalItems = res.data.total;
 				$scope.StartNum = ($scope.pageConfig.page - 1) * $scope.pageConfig.limit + 1;
 				var End = $scope.pageConfig.page * $scope.pageConfig.limit;

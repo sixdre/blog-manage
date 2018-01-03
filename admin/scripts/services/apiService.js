@@ -12,7 +12,19 @@ angular.module('app').factory('apiService',['$http','Upload',function($http,Uplo
 		
 		return $http(config);		
 	}
-	var api={
+	var api = {
+		//登录
+		login:function(username,password) {
+			return handelRequest("POST",'/api/admin_login',{username:username,password:password});
+		},
+		//注册
+		regist:function(username,email,password) {
+			return handelRequest("POST",'/api/admin_regist',{username:username,email:email,password:password});
+		},
+		//获取登录用户信息
+		getUserInfo:function() {
+			return handelRequest("GET",'/api/userInfo');
+		},
 		/*获取文章*/
 		getArticles:function(params){
 			return handelRequest("GET",'/api/articles',params);

@@ -27,9 +27,9 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form id="cform" name="cform" class="form-inline" role="form">
+					<form id="cform" name="cform" role="form">
 						<input type="hidden" id="mid">
-						<div class="form-group">
+						<div class="form-group" style="height:50px;">
 							<input type="text" name="categoryName" ng-blur="cfocus=false" ng-focus="cfocus=true" class="form-control" ng-model="category.name" placeholder="请输入分类名称" required="required">
 							<p class="has-feedback text-danger" ng-show="cfocus">支持多个分类添加,每个分类之间用"/"隔开</p>
 						</div>
@@ -65,9 +65,9 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form id="tform" name="tform" class="form-inline" role="form">
+					<form id="tform" name="tform"  role="form">
 						<input type="hidden">
-						<div class="form-group">
+						<div class="form-group" style="height:50px;">
 							<input type="text"  ng-blur="tfocus=false" ng-focus="tfocus=true" class="form-control" ng-model="tag.name" placeholder="请输入标签名称" required="required">
 							<p class="has-feedback text-danger" ng-show="tfocus">支持多个标签添加,每个标签之间用"/"隔开</p>
 						</div>
